@@ -14,6 +14,9 @@ body{
   min-height:100vh;
   padding-bottom:80px;
 }
+@media(max-width:759px){
+  body{padding-bottom:calc(68px + env(safe-area-inset-bottom));}
+}
 
 /* Header */
 .header{text-align:center;padding:clamp(22px,5vw,38px) 16px 6px;position:relative;}
@@ -23,12 +26,79 @@ body{
 .subtitle{font-size:10px;color:#C8B8DC;letter-spacing:5px;margin-bottom:8px;font-weight:500;}
 .title{font-family:'Nunito',sans-serif;font-size:clamp(22px,6vw,44px);color:#6B3FA0;font-weight:900;line-height:1.2;margin-bottom:6px;letter-spacing:-0.5px;}
 .progress{font-size:12px;color:#B8A8CC;}
+@media(max-width:759px){
+  .header{padding:10px 16px 2px;}
+  .header::before,.header::after{display:none;}
+  .subtitle{font-size:9px;letter-spacing:3px;margin-bottom:3px;}
+  .title{font-size:20px;margin-bottom:2px;}
+  .progress{font-size:10px;}
+}
 
-/* Filter tabs */
-.filters{display:flex;gap:6px;justify-content:center;padding:14px 10px 18px;flex-wrap:wrap;}
-.filter-btn{padding:5px 12px;border-radius:20px;font-size:12px;cursor:pointer;font-family:inherit;border:1.5px solid #E8E0F0;background:white;color:#9080A8;font-weight:400;transition:all 0.15s;white-space:nowrap;}
+/* Search */
+.search-wrap{display:flex;justify-content:center;padding:14px 16px 0;}
+.search-box{display:flex;align-items:center;gap:8px;width:100%;max-width:460px;background:white;border:1.5px solid #E8E0F0;border-radius:24px;padding:7px 14px;transition:border-color 0.15s;}
+.search-box:focus-within{border-color:#C4B5FD;}
+.search-icon{font-size:14px;color:#C0B0D0;flex-shrink:0;}
+.search-input{flex:1;border:none;outline:none;font-size:13px;font-family:inherit;color:#3D2A5A;background:transparent;}
+.search-input::placeholder{color:#C0B0D0;}
+.search-clear{background:none;border:none;font-size:14px;cursor:pointer;color:#C0B0D0;padding:0;line-height:1;display:none;}
+.search-clear.show{display:block;}
+@media(max-width:759px){
+  .search-wrap{padding:8px 12px 0;}
+}
+
+/* Filter tabs — desktop */
+.filters{display:flex;gap:6px;justify-content:center;padding:10px 10px 18px;flex-wrap:wrap;}
+.filter-btn{padding:5px 12px;border-radius:20px;font-size:12px;cursor:pointer;font-family:inherit;border:1.5px solid #E8E0F0;background:white;color:#9080A8;font-weight:400;transition:all 0.15s;white-space:nowrap;display:inline-flex;align-items:center;gap:4px;}
 .filter-btn.active{border-color:#C4B5FD;background:#EDE9FE;color:#5B21B6;font-weight:700;}
 .filter-btn:hover:not(.active){background:#F8F4FF;}
+.fi{font-style:normal;}
+.fl{}
+
+/* Filter tabs — mobile bottom nav */
+@media(max-width:759px){
+  .filters{
+    position:fixed;bottom:0;left:0;right:0;z-index:110;
+    flex-wrap:nowrap;justify-content:stretch;gap:0;
+    padding:6px 0 0;
+    padding-bottom:env(safe-area-inset-bottom);
+    background:rgba(255,255,255,0.94);
+    backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+    border-top:1px solid rgba(196,181,253,0.35);
+    box-shadow:0 -4px 20px rgba(120,80,200,0.07);
+  }
+  .filter-btn{
+    flex:1;min-width:0;
+    flex-direction:column;gap:2px;
+    border:none !important;border-radius:0;
+    background:transparent !important;
+    padding:4px 2px 6px;
+    font-size:9px;color:#B0A0C8;font-weight:400;
+  }
+  .filter-btn.active{color:#5B21B6;font-weight:700;background:transparent !important;}
+  .filter-btn:hover:not(.active){background:transparent !important;}
+  .fi{font-size:18px;line-height:1;display:block;}
+  .fl{display:block;line-height:1;}
+}
+
+/* FAB */
+.fab{display:none;}
+@media(max-width:759px){
+  .fab{
+    display:flex;align-items:center;justify-content:center;
+    position:fixed;
+    right:18px;
+    bottom:calc(62px + env(safe-area-inset-bottom));
+    width:54px;height:54px;border-radius:50%;
+    background:linear-gradient(135deg,#C4B5FD 0%,#A78BFA 100%);
+    color:white;font-size:30px;font-weight:300;line-height:1;
+    border:none;cursor:pointer;z-index:120;
+    box-shadow:0 4px 18px rgba(120,80,200,0.38),0 1px 0 rgba(255,255,255,0.3) inset;
+    transition:transform 0.15s,box-shadow 0.15s;
+    font-family:inherit;
+  }
+  .fab:active{transform:scale(0.91);box-shadow:0 2px 8px rgba(120,80,200,0.22);}
+}
 
 /* Grid */
 .grid{display:grid;gap:9px;padding:0 10px;max-width:920px;margin:0 auto;width:100%;}
@@ -102,6 +172,7 @@ body{
 .add-wrap{display:flex;justify-content:center;padding:22px 0 0;}
 .add-btn{display:flex;align-items:center;gap:8px;padding:12px 28px;border-radius:28px;background:#EDE9FE;border:1.5px solid #C4B5FD;color:#5B21B6;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s;}
 .add-btn:hover{background:#DDD5FF;transform:scale(1.02);}
+@media(max-width:759px){.add-wrap{display:none;}}
 
 /* Modal */
 .overlay{display:none;position:fixed;inset:0;background:rgba(70,40,110,0.26);z-index:200;align-items:flex-end;justify-content:center;}
@@ -145,13 +216,21 @@ body{
   <div class="progress" id="progress"></div>
 </div>
 
+<div class="search-wrap">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="search-input" placeholder="搜索愿望…" oninput="onSearch(this.value)">
+    <button class="search-clear" id="search-clear" onclick="clearSearch()">✕</button>
+  </div>
+</div>
+
 <div class="filters">
-  <button class="filter-btn active" data-f="all">全部 ✦</button>
-  <button class="filter-btn" data-f="place">想去的地方</button>
-  <button class="filter-btn" data-f="exp">想做的事</button>
-  <button class="filter-btn" data-f="food">想吃的美食</button>
-  <button class="filter-btn" data-f="mix">胖胖愿望 🌈</button>
-  <button class="filter-btn" data-f="done">已实现 ✓</button>
+  <button class="filter-btn active" data-f="all"><span class="fi">✦</span><span class="fl">全部</span></button>
+  <button class="filter-btn" data-f="place"><span class="fi">🗺</span><span class="fl">地方</span></button>
+  <button class="filter-btn" data-f="exp"><span class="fi">✨</span><span class="fl">体验</span></button>
+  <button class="filter-btn" data-f="food"><span class="fi">🍜</span><span class="fl">美食</span></button>
+  <button class="filter-btn" data-f="mix"><span class="fi">🌈</span><span class="fl">胖胖</span></button>
+  <button class="filter-btn" data-f="done"><span class="fi">☑</span><span class="fl">已实现</span></button>
 </div>
 
 <div class="grid" id="grid"></div>
@@ -159,6 +238,9 @@ body{
 <div class="add-wrap">
   <button class="add-btn" onclick="openModal()">✦ 许一个新愿望</button>
 </div>
+
+<!-- Mobile FAB -->
+<button class="fab" onclick="openModal()" aria-label="许一个新愿望">+</button>
 
 <!-- Modal -->
 <div class="overlay" id="overlay" onclick="overlayClick(event)">
@@ -268,7 +350,7 @@ const JSONBIN_KEY = '$2a$10$2St/FcYAAz78Dx5KEaYV8OFiNRNOa6yBrrKJd3E6K.91rqzKPUC6
 const JSONBIN_BIN_ID = '69b6a047aa77b81da9e7d4ce';
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-let wishes=[],filter='all',openComment=null,selEmoji='✨',selCats=[];
+let wishes=[],filter='all',searchKw='',openComment=null,selEmoji='✨',selCats=[];
 let editingId=null,detailEmoji='✨',detailCats=[],detailPinned=false;
 let saving=false,saveQueued=false;
 
@@ -277,7 +359,7 @@ let binId=JSONBIN_BIN_ID||localStorage.getItem('xbb-bin-id')||'';
 
 function showStatus(msg,ok=true){
   let el=document.getElementById('sync-status');
-  if(!el){el=document.createElement('div');el.id='sync-status';el.style.cssText='position:fixed;bottom:14px;left:50%;transform:translateX(-50%);padding:6px 16px;border-radius:20px;font-size:12px;font-family:inherit;z-index:999;transition:opacity 0.4s;pointer-events:none;';document.body.appendChild(el);}
+  if(!el){el=document.createElement('div');el.id='sync-status';el.style.cssText='position:fixed;bottom:calc(72px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);padding:6px 16px;border-radius:20px;font-size:12px;font-family:inherit;z-index:999;transition:opacity 0.4s;pointer-events:none;white-space:nowrap;';document.body.appendChild(el);}
   el.textContent=msg;
   el.style.background=ok?'rgba(209,250,229,0.95)':'rgba(254,226,226,0.95)';
   el.style.color=ok?'#065f46':'#991b1b';
@@ -342,6 +424,18 @@ async function save(){
   if(saveQueued){saveQueued=false;save();}
 }
 
+function onSearch(val){
+  searchKw=val.trim();
+  document.getElementById('search-clear').classList.toggle('show',searchKw.length>0);
+  render();
+}
+function clearSearch(){
+  searchKw='';
+  document.getElementById('search-input').value='';
+  document.getElementById('search-clear').classList.remove('show');
+  render();
+}
+
 function render(){
   let vis;
   if(filter==='done')     vis=wishes.filter(w=>w.done);
@@ -349,10 +443,19 @@ function render(){
   else if(filter==='mix') vis=wishes.filter(w=>!w.done&&getCatKey(w.cats)==='mix');
   else                    vis=wishes.filter(w=>!w.done&&(w.cats||[]).includes(filter));
 
+  if(searchKw){
+    const kw=searchKw.toLowerCase();
+    vis=vis.filter(w=>(w.title||'').toLowerCase().includes(kw)||(w.desc||'').toLowerCase().includes(kw));
+  }
+
   const done=wishes.filter(w=>w.done).length;
   document.getElementById('progress').textContent=done+' / '+wishes.length+' 个愿望已实现 🌟';
   const g=document.getElementById('grid');
-  if(!vis.length){g.innerHTML='<div class="empty"><div class="empty-icon">🌱</div><div>这里还没有愿望，快来添加吧～</div></div>';return;}
+  if(!vis.length){
+    const msg=searchKw?`没有找到含「${esc(searchKw)}」的愿望～`:'这里还没有愿望，快来添加吧～';
+    g.innerHTML=`<div class="empty"><div class="empty-icon">${searchKw?'🔍':'🌱'}</div><div>${msg}</div></div>`;
+    return;
+  }
   // 置顶排最前
   vis.sort((a,b)=>(b.pinned?1:0)-(a.pinned?1:0));
   g.innerHTML=vis.map(cardHTML).join('');
